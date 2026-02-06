@@ -4,13 +4,12 @@ import com.agendamento.sistema.dto.AppointmentDTO;
 import com.agendamento.sistema.model.*;
 import com.agendamento.sistema.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@org.springframework.stereotype.Service
 public class AppointmentService {
 
     @Autowired
