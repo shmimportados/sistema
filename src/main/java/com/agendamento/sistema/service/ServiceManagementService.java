@@ -6,12 +6,11 @@ import com.agendamento.sistema.model.Service;
 import com.agendamento.sistema.repository.BusinessRepository;
 import com.agendamento.sistema.repository.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
+@org.springframework.stereotype.Service
 public class ServiceManagementService {
 
     @Autowired
