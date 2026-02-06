@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Negócio - Sistema de Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">Sistema de Agendamento</div>
+        <div class="navbar-menu">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/auth/logout}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <h1>Editar Negócio</h1>
+
+            <div th:if="${error}" class="alert alert-error">
+                <span th:text="${error}"></span>
+            </div>
+
+            <form method="post" th:action="@{/admin/business/{id}/update(id=${business.id})}" class="business-form">
+                <h2>Informações Básicas</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nome do Negócio:</label>
+                        <input type="text" id="name" name="name" th:value="${business.name}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type">Tipo de Negócio:</label>
+                        <select id="type" name="type" required>
+                            <option th:each="type : ${businessTypes}" th:value="${type}" 
+                                    th:text="${type}" th:selected="${business.type == type}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descrição:</label>
+                    <textarea id="description" name="description" rows="4" th:text="${business.description}"></textarea>
+                </div>
+
+                <h2>Contato</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Telefone:</label>
+                        <input type="tel" id="phone" name="phone" th:value="${business.phone}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="whatsappPhone">WhatsApp:</label>
+                        <input type="tel" id="whatsappPhone" name="whatsappPhone" th:value="${business.whatsappPhone}" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" th:value="${business.email}" required>
+                </div>
+
+                <h2>Endereço</h2>
+
+                <div class="form-group">
+                    <label for="address">Rua:</label>
+                    <input type="text" id="address" name="address" th:value="${business.address}" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">Cidade:</label>
+                        <input type="text" id="city" name="city" th:value="${business.city}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">Estado:</label>
+                        <input type="text" id="state" name="state" th:value="${business.state}" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zipCode">CEP:</label>
+                        <input type="text" id="zipCode" name="zipCode" th:value="${business.zipCode}" required>
+                    </div>
+                </div>
+
+                <h2>Configurações</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="businessHoursStart">Horário de Abertura:</label>
+                        <input type="time" id="businessHoursStart" name="businessHoursStart" th:value="${business.businessHoursStart}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="businessHoursEnd">Horário de Fechamento:</label>
+                        <input type="time" id="businessHoursEnd" name="businessHoursEnd" th:value="${business.businessHoursEnd}">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appointmentDurationMinutes">Duração do Agendamento (minutos):</label>
+                        <input type="number" id="appointmentDurationMinutes" name="appointmentDurationMinutes" 
+                               th:value="${business.appointmentDurationMinutes}" min="15" step="15">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reminderHoursBefore">Lembrete com Antecedência (horas):</label>
+                        <input type="number" id="reminderHoursBefore" name="reminderHoursBefore" 
+                               th:value="${business.reminderHoursBefore}" min="1">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enableEmailReminder" name="enableEmailReminder" 
+                                   th:checked="${business.enableEmailReminder}">
+                            Ativar Lembrete por Email
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enableWhatsappReminder" name="enableWhatsappReminder" 
+                                   th:checked="${business.enableWhatsappReminder}">
+                            Ativar Lembrete por WhatsApp
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    <a th:href="@{/admin/business/{id}(id=${business.id})}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        .business-form h2 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+    </style>
+</body>
+</html>

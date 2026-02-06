@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Proprietário - Sistema de Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">Sistema de Agendamento</div>
+        <div class="navbar-menu">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <span th:text="${user.fullName}"></span>
+            <a th:href="@{/auth/logout}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="dashboard">
+            <h1>Painel do Proprietário</h1>
+
+            <div class="dashboard-section">
+                <h2>Seus Negócios</h2>
+                <a th:href="@{/admin/business/new}" class="btn btn-primary">Criar Novo Negócio</a>
+
+                <div th:if="${businesses.isEmpty()}" class="empty-state">
+                    <p>Você ainda não tem nenhum negócio registrado.</p>
+                </div>
+
+                <div class="business-grid">
+                    <div th:each="business : ${businesses}" class="business-card">
+                        <h3 th:text="${business.name}"></h3>
+                        <p th:text="'Tipo: ' + ${business.type}"></p>
+                        <p th:text="'Telefone: ' + ${business.phone}"></p>
+
+                        <div class="business-actions">
+                            <a th:href="@{/admin/business/{id}(id=${business.id})}" class="btn btn-secondary">Ver Detalhes</a>
+                            <a th:href="@{/admin/appointments/{id}(id=${business.id})}" class="btn btn-secondary">Agendamentos</a>
+                            <a th:href="@{/admin/services/{id}(id=${business.id})}" class="btn btn-secondary">Serviços</a>
+                            <a th:href="@{/admin/customers/{id}(id=${business.id})}" class="btn btn-secondary">Clientes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .business-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .business-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .business-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .business-actions .btn {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+    </style>
+</body>
+</html>

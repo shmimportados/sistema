@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - Sistema de Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">Sistema de Agendamento</div>
+        <div class="navbar-menu">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/auth/logout}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 th:text="'Clientes - ' + ${business.name}"></h1>
+            <a th:href="@{/admin/customers/{id}/new(id=${business.id})}" class="btn btn-primary">Novo Cliente</a>
+        </div>
+
+        <div th:if="${customers.isEmpty()}" class="empty-state">
+            <p>Nenhum cliente cadastrado.</p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>WhatsApp</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="customer : ${customers}">
+                    <td th:text="${customer.fullName}"></td>
+                    <td th:text="${customer.phone}"></td>
+                    <td th:text="${customer.email}"></td>
+                    <td th:text="${customer.whatsappPhone}"></td>
+                    <td>
+                        <a href="#" class="btn btn-secondary btn-small">Editar</a>
+                        <a href="#" class="btn btn-danger btn-small" onclick="return confirm('Tem certeza?')">Deletar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
