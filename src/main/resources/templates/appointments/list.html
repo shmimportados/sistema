@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: content">
+
+<h2>Agendamentos</h2>
+
+<a href="/appointments/new" class="btn btn-primary mb-3">Novo</a>
+
+<table class="table table-bordered">
+
+<thead>
+<tr>
+    <th>Cliente</th>
+    <th>Serviço</th>
+    <th>Empresa</th>
+    <th>Data/Hora</th>
+    <th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+<tr th:each="a : ${appointments}">
+    <td th:text="${a.customer.name}"></td>
+    <td th:text="${a.service.name}"></td>
+    <td th:text="${a.business.name}"></td>
+    <td th:text="${#temporals.format(a.appointmentDateTime,'dd/MM/yyyy HH:mm')}"></td>
+    <td th:text="${a.status}"></td>
+</tr>
+</tbody>
+
+</table>
+
+</html>

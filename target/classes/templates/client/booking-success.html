@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento Realizado - Sistema de Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="public-page">
+        <div class="success-container">
+            <div class="success-icon">✓</div>
+            <h1>Agendamento Realizado com Sucesso!</h1>
+            <p>Você receberá uma confirmação por email e WhatsApp em breve.</p>
+            <p>Obrigado por agendar conosco!</p>
+        </div>
+    </div>
+
+    <style>
+        .public-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-container {
+            background: white;
+            padding: 60px 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .success-icon {
+            font-size: 48px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .success-container h1 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .success-container p {
+            color: #666;
+            margin: 10px 0;
+        }
+    </style>
+</body>
+</html>

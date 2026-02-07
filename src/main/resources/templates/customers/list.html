@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: content">
+
+<h2>Clientes</h2>
+
+<a href="/customers/new" class="btn btn-primary mb-3">Novo</a>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="c : ${customers}">
+            <td th:text="${c.id}"></td>
+            <td th:text="${c.name}"></td>
+
+            <td>
+                <a th:href="@{/customers/edit/{id}(id=${c.id})}" class="btn btn-warning btn-sm">Editar</a>
+                <a th:href="@{/customers/delete/{id}(id=${c.id})}" class="btn btn-danger btn-sm">Excluir</a>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+</html>

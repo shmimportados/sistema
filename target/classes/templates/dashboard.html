@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: content">
+
+<h2>Dashboard</h2>
+
+<div class="row mt-4">
+
+    <div class="col-md-3">
+        <div class="card p-3 text-center">
+            <h4 th:text="${totalAppointments}">0</h4>
+            <p>Agendamentos</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card p-3 text-center">
+            <h4 th:text="${totalCustomers}">0</h4>
+            <p>Clientes</p>
+        </div>
+    </div>
+
+</div>
+
+</html>

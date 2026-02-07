@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Serviço - Sistema de Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">Sistema de Agendamento</div>
+        <div class="navbar-menu">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/auth/logout}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <h1>Editar Serviço</h1>
+
+            <div th:if="${error}" class="alert alert-error">
+                <span th:text="${error}"></span>
+            </div>
+
+            <form method="post" th:action="@{/admin/services/{businessId}/{serviceId}/update(businessId=${business.id}, serviceId=${service.id})}">
+                <div class="form-group">
+                    <label for="name">Nome do Serviço:</label>
+                    <input type="text" id="name" name="name" th:value="${service.name}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Descrição:</label>
+                    <textarea id="description" name="description" rows="4" th:text="${service.description}"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="price">Preço (R$):</label>
+                        <input type="number" id="price" name="price" th:value="${service.price}" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="durationMinutes">Duração (minutos):</label>
+                        <input type="number" id="durationMinutes" name="durationMinutes" th:value="${service.durationMinutes}" min="15" step="15" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    <a th:href="@{/admin/services/{id}(id=${business.id})}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

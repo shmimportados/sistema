@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layout :: content">
+
+<h2>Cliente</h2>
+
+<form th:action="@{/customers/save}" th:object="${customer}" method="post">
+
+    <input type="hidden" th:field="*{id}">
+
+    <input class="form-control mb-2" placeholder="Nome" th:field="*{name}">
+
+    <button class="btn btn-success">Salvar</button>
+    <a href="/customers" class="btn btn-secondary">Voltar</a>
+
+</form>
+
+</html>

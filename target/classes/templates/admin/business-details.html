@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Negócio - Sistema de Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-brand">Sistema de Agendamento</div>
+        <div class="navbar-menu">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/auth/logout}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form-container">
+            <h1 th:text="${business.name}"></h1>
+
+            <div class="business-details-grid">
+                <div>
+                    <h3>Informações Básicas</h3>
+                    <p><strong>Tipo:</strong> <span th:text="${business.type}"></span></p>
+                    <p><strong>Descrição:</strong> <span th:text="${business.description}"></span></p>
+                    <p><strong>Email:</strong> <span th:text="${business.email}"></span></p>
+                    <p><strong>Telefone:</strong> <span th:text="${business.phone}"></span></p>
+                    <p><strong>WhatsApp:</strong> <span th:text="${business.whatsappPhone}"></span></p>
+                </div>
+
+                <div>
+                    <h3>Endereço</h3>
+                    <p><span th:text="${business.address}"></span></p>
+                    <p><span th:text="${business.city} + ', ' + ${business.state}"></span></p>
+                    <p><span th:text="${business.zipCode}"></span></p>
+                </div>
+
+                <div>
+                    <h3>Configurações</h3>
+                    <p><strong>Horário de Funcionamento:</strong> <span th:text="${business.businessHoursStart} + ' - ' + ${business.businessHoursEnd}"></span></p>
+                    <p><strong>Duração do Agendamento:</strong> <span th:text="${business.appointmentDurationMinutes} + ' minutos'"></span></p>
+                    <p><strong>Lembrete com Antecedência:</strong> <span th:text="${business.reminderHoursBefore} + ' horas'"></span></p>
+                    <p><strong>Email Ativado:</strong> <span th:text="${business.enableEmailReminder ? 'Sim' : 'Não'}"></span></p>
+                    <p><strong>WhatsApp Ativado:</strong> <span th:text="${business.enableWhatsappReminder ? 'Sim' : 'Não'}"></span></p>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a th:href="@{/admin/business/{id}/edit(id=${business.id})}" class="btn btn-primary">Editar</a>
+                <a th:href="@{/admin/dashboard}" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .business-details-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .business-details-grid h3 {
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .business-details-grid p {
+            margin-bottom: 10px;
+        }
+
+        .business-details-grid strong {
+            color: #333;
+        }
+    </style>
+</body>
+</html>

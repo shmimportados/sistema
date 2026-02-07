@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking - Sistema de Agendamento</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="public-page">
+        <div class="booking-container">
+            <div class="business-info">
+                <h1 th:text="${business.name}"></h1>
+                <p th:text="'Tipo: ' + ${business.type}"></p>
+                <p th:text="'Telefone: ' + ${business.phone}"></p>
+                <p th:text="'Email: ' + ${business.email}"></p>
+            </div>
+
+            <h2>Faça seu Agendamento</h2>
+
+            <div th:if="${error}" class="alert alert-error">
+                <span th:text="${error}"></span>
+            </div>
+
+            <form method="post" th:action="@{/book/{businessId}/create-appointment(businessId=${business.id})}" class="booking-form">
+                <h3>Seus Dados</h3>
+
+                <div class="form-group">
+                    <label for="customerName">Nome Completo:</label>
+                    <input type="text" id="customerName" name="customerName" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerPhone">Telefone:</label>
+                        <input type="tel" id="customerPhone" name="customerPhone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerEmail">Email:</label>
+                        <input type="email" id="customerEmail" name="customerEmail">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="customerWhatsapp">WhatsApp:</label>
+                    <input type="tel" id="customerWhatsapp" name="customerWhatsapp" required>
+                </div>
+
+                <h3>Agendamento</h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="serviceId">Serviço:</label>
+                        <select id="serviceId" name="serviceId" required>
+                            <option value="">Selecione um serviço...</option>
+                            <option th:each="service : ${services}" th:value="${service.id}" 
+                                    th:text="${service.name} + ' - R$ ' + ${service.price}"></option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appointmentDateTime">Data e Hora:</label>
+                        <input type="datetime-local" id="appointmentDateTime" name="appointmentDateTime" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Observações:</label>
+                    <textarea id="notes" name="notes" rows="3" placeholder="Deixe alguma observação se necessário"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary btn-large">Agendar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        .public-page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .booking-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .business-info {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .booking-form h3 {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+    </style>
+</body>
+</html>
